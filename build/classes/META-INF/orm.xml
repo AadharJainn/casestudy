@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings version="1.0" xmlns="http://java.sun.com/xml/ns/persistence/orm"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm http://java.sun.com/xml/ns/persistence/orm_1_0.xsd">
+    
+    
+    <named-query name="PizzaEntity.findAllPizzaDetails">
+        <query>Select t from pizza t</query>
+    </named-query>
+    <entity class="ct.dp.entity.PizzaEntity"></entity>
+    
+    
+    <named-native-query name="PizzaEntity.saveAllPizzaDetails"
+     result-class="ct.dp.entity.PizzaEntity">
+        <query>insert into pizza values (?,?,?) </query>
+    </named-native-query>
+  
+    
+</entity-mappings>
