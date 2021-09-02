@@ -26,29 +26,30 @@ public class PizzaOrderWrapper {
 	@Autowired
 	private PizzaDao pizzaDao;
 	@Autowired
-	private PizzaOrderDao pizzaOrderoDao;
+	private PizzaOrderDao pizzaOrderDao;
 	PizzaEntity pizzaEntity;
 	@PersistenceContext
 	private EntityManager entityManager;
 
 	List<PizzaBean> findAllPizzaDetails() {
-		List<PizzaBean> pizzaBean = new ArrayList<PizzaBean>();
-		List<PizzaEntity> pizzaEntity = new ArrayList<PizzaEntity>();
 
+		List<PizzaEntity> pizzaEntity = pizzaDao.findAllPizzaDetails();
+		List<PizzaBean> pizzaBean = new ArrayList<PizzaBean>();
 		BeanUtils.copyProperties(pizzaEntity, pizzaBean);
 		return pizzaBean;
 
 	}
 
-	PizzaOrderBean addPizzaOrderDetails(PizzaOrderBean pizzaOrderBean) {
+	PizzaOrderEntity addPizzaOrderDetails(PizzaOrderBean pizzaOrderBean) {
 
 		PizzaOrderEntity pizzaOrderEntity = new PizzaOrderEntity();
 		BeanUtils.copyProperties(pizzaOrderBean, pizzaOrderEntity);
-		return pizzaOrderBean;
+		return pizzaOrderDao.save(pizzaOrderEntity);
 	}
 
 	Double getPizzaPrice(Integer pizzaId) {
-		double pizzaEntity = entityManager.find(PizzaEntity.class, pizzaId).getPrice();
+
+		Double pizzaEntity = entityManager.find(PizzaEntity.class, pizzaId).getPrice();
 		return pizzaEntity;
 	};
 
@@ -57,7 +58,12 @@ public class PizzaOrderWrapper {
 		Query q = entityManager.createQuery("select u from pizza u where u.price between :fromPrice and :toPrice")
 				.setParameter("fromPrice", fromPrice).setParameter("toPrice", toPrice);
 
-		return q.getResultList();
+		List<PizzaOrderBean> pizzaBean = new ArrayList<PizzaOrderBean>();
+		List<PizzaOrderEntity> pizzaOrderEntity = new ArrayList<PizzaOrderEntity>();
+		for (PizzaOrderEntity pizzaOrder : pizzaOrderEntity) {
+			BeanUtils.copyProperties(pizzaOrder, pizzaBean);
+			pizzaBean.addAll(q.getResultList());
+		}
+		return pizzaBean;
 	};
-
 }
