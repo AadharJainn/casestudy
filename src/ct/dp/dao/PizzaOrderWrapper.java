@@ -24,17 +24,17 @@ import ct.dp.entity.PizzaOrderEntity;
 @Transactional(value = "txManager")
 public class PizzaOrderWrapper {
 	@Autowired
-	private PizzaDao pd;
+	private PizzaDao pizzaDao;
 	@Autowired
-	private PizzaOrderDao pod;
-	PizzaEntity pz;
+	private PizzaOrderDao pizzaOrderoDao;
+	PizzaEntity pizzaEntity;
 	@PersistenceContext
 	private EntityManager entityManager;
 
 	List<PizzaBean> findAllPizzaDetails() {
 		List<PizzaBean> pizzaBean = new ArrayList<PizzaBean>();
-		List<PizzaEntity> pizzaEntity = entityManager
-				.createNamedQuery("PizzaEntity.findAllPizzaDetails", PizzaEntity.class).getResultList();
+		List<PizzaEntity> pizzaEntity = new ArrayList<PizzaEntity>();
+
 		BeanUtils.copyProperties(pizzaEntity, pizzaBean);
 		return pizzaBean;
 
@@ -44,12 +44,12 @@ public class PizzaOrderWrapper {
 
 		PizzaOrderEntity pizzaOrderEntity = new PizzaOrderEntity();
 		BeanUtils.copyProperties(pizzaOrderBean, pizzaOrderEntity);
-		return null;
+		return pizzaOrderBean;
 	}
 
 	Double getPizzaPrice(Integer pizzaId) {
-		return pd.findOne(pizzaId).getPrice();
-
+		double pizzaEntity = entityManager.find(PizzaEntity.class, pizzaId).getPrice();
+		return pizzaEntity;
 	};
 
 	@SuppressWarnings("unchecked")
