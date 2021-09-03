@@ -27,6 +27,9 @@ public class PizzaServiceImpl implements PizzaService {
 	@Override
 	public PizzaOrderBean addPizzaOrderDetails(PizzaOrderBean pizzaOrderBean) {
 		Double price = pizzaDaoWrapper.getPizzaPrice(pizzaOrderBean.getPizzaId());
+		if (price == null) {
+			throw new NullPointerException("Sorry, cannot find pizza price");
+		}
 		Integer pieces = pizzaOrderBean.getNumberOfPiecesOrdered();
 		Double bill = price * pieces;
 		pizzaOrderBean.setBill(bill);
@@ -39,6 +42,9 @@ public class PizzaServiceImpl implements PizzaService {
 		Map<Integer, String> map = new HashMap<Integer, String>();
 
 		List<PizzaBean> list = pizzaDaoWrapper.findAllPizzaDetails();
+		if (list == null) {
+			throw new NullPointerException("Sorry, No data found currently");
+		}
 		for (PizzaBean pizzaBean : list) {
 			map.put(pizzaBean.getPizzaId(), pizzaBean.getPizzaName());
 		}

@@ -7,13 +7,5 @@
     <named-query name="PizzaEntity.findAllPizzaDetails">
         <query>Select t from pizza t</query>
     </named-query>
-    <entity class="ct.dp.entity.PizzaEntity"></entity>
-    
-    
-    <named-native-query name="PizzaEntity.saveAllPizzaDetails"
-     result-class="ct.dp.entity.PizzaEntity">
-        <query>insert into pizza values (?,?,?) </query>
-    </named-native-query>
-  
-    
+    <entity class="ct.dp.entity.PizzaEntity"></entity>    
 </entity-mappings>

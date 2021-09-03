@@ -1,12 +1,9 @@
 package ct.dp.controller;
 
-import java.util.HashMap;
 import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -43,13 +40,16 @@ public class PizzaOrderController {
 		}
 		Integer orderId = pizzaService.addPizzaOrderDetails(pizzaOrderBean).getOrderId();
 		Double bill = pizzaService.addPizzaOrderDetails(pizzaOrderBean).getBill();
-		saveModel.addObject(bill);
-		saveModel.addObject(orderId);
+		String customerName=pizzaService.addPizzaOrderDetails(pizzaOrderBean).getCustomerName();
+		saveModel.addObject("bill",bill);
+		saveModel.addObject("order",orderId);
+		saveModel.addObject("name",customerName);
 		saveModel.addObject("success", "Add Pizza Order Details Success");
 		saveModel.setViewName("PizzaOrderSuccess");
 		return saveModel;
 	}
 
+	@RequestMapping(path = "/polulate", method = RequestMethod.POST)
 	public Map<Integer, String> populatePizzaNames() {
 		Map<Integer, String> map = pizzaService.findAllPizzaDetails();
 		return map;

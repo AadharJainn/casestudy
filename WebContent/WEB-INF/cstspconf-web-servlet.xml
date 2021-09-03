@@ -11,7 +11,7 @@
         http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
     <!-- scanning just web related dependencies -->
-	<context:component-scan base-package="com.ct.lkm.web" />
+	<context:component-scan base-package="ct.dp.controller" />
 	
 	<!--adds support for MVC annotations:
 	1. @Valid annotation for validation

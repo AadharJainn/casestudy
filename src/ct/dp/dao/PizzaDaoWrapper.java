@@ -31,8 +31,12 @@ public class PizzaDaoWrapper {
 	public List<PizzaBean> findAllPizzaDetails() {
 
 		List<PizzaEntity> pizzaEntity = pizzaDao.findAllPizzaDetails();
+		if (pizzaEntity == null) {
+			throw new NullPointerException("No pizza details found");
+		}
 		List<PizzaBean> pizzaBean = new ArrayList<PizzaBean>();
 		BeanUtils.copyProperties(pizzaEntity, pizzaBean);
+
 		return pizzaBean;
 
 	}
@@ -42,6 +46,9 @@ public class PizzaDaoWrapper {
 		PizzaOrderEntity pizzaOrderEntity = new PizzaOrderEntity();
 		BeanUtils.copyProperties(pizzaOrderBean, pizzaOrderEntity);
 		pizzaOrderDao.save(pizzaOrderEntity);
+		if (pizzaOrderDao == null) {
+			throw new NullPointerException("Unable to save data..");
+		}
 		BeanUtils.copyProperties(pizzaOrderEntity, pizzaOrderBean);
 		return pizzaOrderBean;
 
@@ -49,15 +56,21 @@ public class PizzaDaoWrapper {
 
 	public Double getPizzaPrice(Integer pizzaId) {
 
-		Double pizzaEntity = entityManager.find(PizzaEntity.class, pizzaId).getPrice();
-		return pizzaEntity;
+		Double price = entityManager.find(PizzaEntity.class, pizzaId).getPrice();
+
+		if (entityManager == null) {
+			throw new NullPointerException("No data found..try again");
+		}
+		return price;
 	};
 
 	@SuppressWarnings("unchecked")
 	public List<PizzaOrderBean> getOrderDetails(double fromPrice, double toPrice) {
 		Query q = entityManager.createQuery("select u from pizza u where u.price between :fromPrice and :toPrice")
 				.setParameter("fromPrice", fromPrice).setParameter("toPrice", toPrice);
-
+		if (q == null) {
+			throw new NullPointerException("No data found in this price range...");
+		}
 		List<PizzaOrderBean> pizzaBean = new ArrayList<PizzaOrderBean>();
 		List<PizzaOrderEntity> pizzaOrderEntity = new ArrayList<PizzaOrderEntity>();
 		for (PizzaOrderEntity pizzaOrder : pizzaOrderEntity) {

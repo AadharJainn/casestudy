@@ -1,12 +1,28 @@
 package ct.dp.business.bean;
 
-public class PizzaOrderBean {
+import javax.persistence.Column;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
+
+
+public class PizzaOrderBean {
+	@NotNull(message = "order id cannot be empty")
 	private int orderId;
+	@NotNull(message = "pizza id cannot be empty")
 	private int pizzaId;
+	@NotNull
+	@Pattern(regexp = "[a-zA-Z]{3,30}$", message = "Customer Name should have length between 3 and 30")
 	private String customerName;
+	@NotNull
+	@Pattern(regexp = "[0-9]", message="Contact Number should have length 10")
+	@Column(length = 10)
 	private String contactNumber;
+	@NotNull
 	private double bill;
+	@NotNull
+	@Size(min = 1, message = "Quantity should not be empty")
 	private int numberOfPiecesOrdered;
 
 	public PizzaOrderBean(int orderId, int pizzaId, String customerName, String contactNumber, double bill,

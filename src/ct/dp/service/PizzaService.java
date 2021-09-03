@@ -7,8 +7,8 @@ import ct.dp.business.bean.PizzaOrderBean;
 
 public interface PizzaService {
 	
-	List<PizzaOrderBean> getOrderDetails(Double fromBill, Double tobill);
-	PizzaOrderBean addPizzaOrderDetails(PizzaOrderBean pizzaBean);
+	List<PizzaOrderBean> getOrderDetails(Double fromBill, Double toBill);
+	PizzaOrderBean addPizzaOrderDetails(PizzaOrderBean pizzaOrderBean);
 	Map<Integer, String> findAllPizzaDetails();
 
 }

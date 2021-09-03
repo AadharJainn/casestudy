@@ -1,15 +1,18 @@
 package ct.dp.dao;
 
-import java.util.List;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
-import ct.dp.entity.PizzaEntity;
+import org.springframework.stereotype.Repository;
 
-@Transactional(value = "txManager")
-public interface PizzaDao  extends JpaRepository<PizzaEntity, Integer> {
+import ct.dp.entity.PizzaOrderEntity;
+
+@Repository
+public interface PizzaOrderDao extends JpaRepository<PizzaOrderEntity, Integer> 
+{
+
+
+@SuppressWarnings("unchecked")
+public	PizzaOrderEntity save(PizzaOrderEntity pizzaOrderEntity);
 	
-	@Query(name="PizzaOrderEntity.findAllPizzaDetails")
-	public List<PizzaEntity> findAllPizzaDetails();
+	
 	
 }

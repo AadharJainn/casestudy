@@ -11,6 +11,6 @@
         http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
     <!-- scanning service and DAO -->
-	<context:component-scan base-package="com.ct.lkm.service, com.ct.lkm.dao" />
+	<context:component-scan base-package="ct.dp.service, ct.dp.dao" />
  	<import resource="cst_jpa_spring_config.xml"/>
 </beans>

@@ -4,12 +4,18 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>Dan Pizza!</title>
 </head>
 <body>
 <center>
-	<h2>Index</h2>
-	<a href="${pageContext.request.contextPath}/LoadSaveCustomer.html">Add Employee</a>
+
+	<h2>Dan Pizza's</h2>
+	<a href="PizzaOrder.jsp">Save Order</a>
+  <br>
+  <br>
+  <a href="${pageContext.request.contextPath}/LoadSaveCustomer.html">View Report</a>
+ 
+    
 </center>
 </body>
 </html>
