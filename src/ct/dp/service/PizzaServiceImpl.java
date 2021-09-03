@@ -1,38 +1,49 @@
 package ct.dp.service;
-import java.util.ArrayList;
+
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import ct.dp.business.bean.PizzaBean;
 import ct.dp.business.bean.PizzaOrderBean;
 import ct.dp.dao.PizzaDaoWrapper;
 
-
 @Service
-public class PizzaServiceImpl implements PizzaService{
-	
+public class PizzaServiceImpl implements PizzaService {
+
 	@Autowired
 	private PizzaDaoWrapper pizzaDaoWrapper;
 
-	@Override
-	public List<PizzaOrderBean> getOrderDetails(Double fromBill, Double tobill) {
-		List<PizzaOrderBean> pizzaOrderBean=new ArrayList<PizzaOrderBean>();
-		
+	public List<PizzaOrderBean> getOrderDetails(Double fromBill, Double toBill) {
+		List<PizzaOrderBean> pizzaOrderBean = pizzaDaoWrapper.getOrderDetails(fromBill, toBill);
+		if (pizzaOrderBean == null) {
+			throw new NullPointerException("Sorry, No data found!!");
+		}
 		return pizzaOrderBean;
 	}
 
 	@Override
-	public PizzaOrderBean addPizzaOrderDetails(PizzaOrderBean pizzaBean) {
-		// TODO Auto-generated method stub
-		return null;
+	public PizzaOrderBean addPizzaOrderDetails(PizzaOrderBean pizzaOrderBean) {
+		Double price = pizzaDaoWrapper.getPizzaPrice(pizzaOrderBean.getPizzaId());
+		Integer pieces = pizzaOrderBean.getNumberOfPiecesOrdered();
+		Double bill = price * pieces;
+		pizzaOrderBean.setBill(bill);
+		return pizzaDaoWrapper.addPizzaOrderDetails(pizzaOrderBean);
+
 	}
 
 	@Override
 	public Map<Integer, String> findAllPizzaDetails() {
-		// TODO Auto-generated method stub
-		return null;
+		Map<Integer, String> map = new HashMap<Integer, String>();
+
+		List<PizzaBean> list = pizzaDaoWrapper.findAllPizzaDetails();
+		for (PizzaBean pizzaBean : list) {
+			map.put(pizzaBean.getPizzaId(), pizzaBean.getPizzaName());
+		}
+
+		return map;
 	}
 
-	
-	
 }
