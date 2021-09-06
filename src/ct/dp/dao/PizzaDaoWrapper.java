@@ -37,7 +37,7 @@ public class PizzaDaoWrapper {
 		List<PizzaBean> pizzaBean = new ArrayList<PizzaBean>();
 		BeanUtils.copyProperties(pizzaEntity, pizzaBean);
 
-		return pizzaBean;
+		return this.findAllPizzaDetails();
 
 	}
 
@@ -50,7 +50,7 @@ public class PizzaDaoWrapper {
 			throw new NullPointerException("Unable to save data..");
 		}
 		BeanUtils.copyProperties(pizzaOrderEntity, pizzaOrderBean);
-		return pizzaOrderBean;
+		return this.addPizzaOrderDetails(pizzaOrderBean);
 
 	}
 

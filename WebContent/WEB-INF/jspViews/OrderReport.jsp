@@ -10,7 +10,7 @@
 </head>
 <body>
 	<form method="post" action="getdetails">
-		<center>
+	<div align="center">
 			<tbody>
 				<table border="1" width="20%" cellpadding="7">
 					<h3>Order with in Price Range Report</h3>
@@ -41,16 +41,16 @@
 					</thead>
 					<c:forEach var="billDetails" items="${billDetails}">
 						<tr>
-							<td>${getPizzaOrder.orderId}</td>
-							<td>${getPizzaOrder.customerName}</td>
-							<td>${getPizzaOrder.pizzaId}</td>
-							<td>${getPizzaOrder.bill}</td>
-							<td>${getPizzaOrder.numberOfPiecesOrdered}</td>
+							<td>${billDetails.orderId}</td>
+							<td>${billDetails.customerName}</td>
+							<td>${billDetails.pizzaId}</td>
+							<td>${billDetails.bill}</td>
+							<td>${billDetails.numberOfPiecesOrdered}</td>
 						</tr>
 					</c:forEach>
 				</table>
 				<a ref="index.jsp">Home</a>
-		</center>
+		</div>
 	</form>
 </body>
 </html>

@@ -35,8 +35,8 @@ public class ReportController {
 		ModelAndView getOrderModel = new ModelAndView();
 		Double fromRange = billRangeBean.getFromPrice();
 		Double toRange = billRangeBean.getToPrice();
-		List<PizzaOrderBean> billRange = pizzaService.getOrderDetails(fromRange, toRange);
-		getOrderModel.addObject(billRange);
+		List<PizzaOrderBean> billDetails = pizzaService.getOrderDetails(fromRange, toRange);
+		getOrderModel.addObject("billDetails",billDetails);
 		getOrderModel.setViewName("OrderReport");
 		return getOrderModel;
 	}
@@ -45,7 +45,7 @@ public class ReportController {
 	@ExceptionHandler(value = Exception.class)
 	public ModelAndView handleAllException() {
 		ModelAndView modelandview = new ModelAndView();
-		modelandview.addObject("error", "exception occured!");
+		modelandview.addObject("secondError", "No records were found for the entered bill range!");
 		modelandview.setViewName(" GeneralizedExceptionHandlerPage");
 		return modelandview;
 	}

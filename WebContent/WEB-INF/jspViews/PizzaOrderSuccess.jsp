@@ -8,9 +8,9 @@
 <title>Add Pizza Order Details Success</title>
 </head>
 <body>
-<center>
+<div align="center">
  <h3> Hi:${name},your order is placed with order id:${order},Bill to be paid is: ${bill}</h3>
  <a href="index.jsp" >Home</a>
-</center>
+</div>
 </body>
 </html>

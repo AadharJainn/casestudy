@@ -21,7 +21,7 @@ public class PizzaOrderController {
 	@Autowired
 	PizzaService pizzaService;
 
-	@RequestMapping("/load")
+	@RequestMapping("/home")
 	public ModelAndView loadSavePizza() {
 		PizzaOrderBean pizzaOrderBean = new PizzaOrderBean();
 		ModelAndView loadModel = new ModelAndView();
@@ -40,10 +40,10 @@ public class PizzaOrderController {
 		}
 		Integer orderId = pizzaService.addPizzaOrderDetails(pizzaOrderBean).getOrderId();
 		Double bill = pizzaService.addPizzaOrderDetails(pizzaOrderBean).getBill();
-		String customerName=pizzaService.addPizzaOrderDetails(pizzaOrderBean).getCustomerName();
-		saveModel.addObject("bill",bill);
-		saveModel.addObject("order",orderId);
-		saveModel.addObject("name",customerName);
+		String customerName = pizzaService.addPizzaOrderDetails(pizzaOrderBean).getCustomerName();
+		saveModel.addObject("bill", bill);
+		saveModel.addObject("order", orderId);
+		saveModel.addObject("name", customerName);
 		saveModel.addObject("success", "Add Pizza Order Details Success");
 		saveModel.setViewName("PizzaOrderSuccess");
 		return saveModel;

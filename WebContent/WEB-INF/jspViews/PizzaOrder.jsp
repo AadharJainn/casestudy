@@ -9,7 +9,7 @@
 </head>
 <body>
 	<form method="post" action="save">
-		<center>
+		<div align="center">
 			<tbody>
 				<table border="5" width="30%" cellpadding="7">
 					Add Pizza Details
@@ -48,11 +48,11 @@
 
 				<a ref="index.jsp">Home</a>
 			</tbody>
-			<center><h3>All Errors</h3></center>
+			<div align="center"><h3>All Errors</h3></div>
 			<div class="alert alert-danger" role="alert">
 	<form:errors path="pizzaOrderBean.*"/>
 	</div>
-	</center>
+	</div>
 	</form>
 </body>
 </html>

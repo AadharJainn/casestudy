@@ -12,5 +12,5 @@
 
     <!-- scanning service and DAO -->
 	<context:component-scan base-package="ct.dp.service, ct.dp.dao" />
- 	<import resource="cst_jpa_spring_config.xml"/>
+ <import resource="cst_jpa_spring_config.xml"/> 	
 </beans>

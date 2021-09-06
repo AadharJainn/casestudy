@@ -5,9 +5,16 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>${error}</title>
+<title>Details Error</title>
 </head>
 <body>
-<h1>Error Occured!</h1>
+<div align="center">
+<h1 style="color:red" > Generalized Exception Handler Page</h1>
+<hr>
+<h1>Error Occured is: ${secondError}</h1>
+<hr>
+<br>
+<a href="index.jsp">Home</a>
+</div>
 </body>
 </html>
